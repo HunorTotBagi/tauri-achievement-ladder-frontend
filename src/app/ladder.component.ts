@@ -27,7 +27,7 @@ export class AchievementLadderComponent implements OnInit {
     return [
       {
         rank: 1,
-        name: 'Larahh',
+        name: 'Larahhh',
         realm: 'Tauri',
         raceIcon: '⚔️',
         classIcon: '🗡️',
