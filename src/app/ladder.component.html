@@ -1,0 +1,37 @@
+<div class="ladder-container">
+  <div class="ladder-header">
+    <button (click)="setSort('achievementPoints')" [class.active]="currentSort === 'achievementPoints'">Achievement points</button>
+    <button (click)="setSort('honorableKills')" [class.active]="currentSort === 'honorableKills'">Honorable kills</button>
+    <button (click)="setSort('timePlayed')" [class.active]="currentSort === 'timePlayed'">Time played</button>
+  </div>
+
+  <table class="wow-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Race / Class</th>
+        <th>Realm</th>
+        <th>Guild</th>
+        <th>Achievement points</th>
+        <th>Honorable kills</th>
+        <th>Time played</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let player of players" [ngClass]="player.faction">
+        <td>{{ player.rank }}</td>
+        <td class="player-name">{{ player.name }}</td>
+        <td>
+          <img [src]="player.raceIcon" class="icon">
+          <img [src]="player.classIcon" class="icon">
+        </td>
+        <td>{{ player.realm }}</td>
+        <td>{{ player.guild }}</td>
+        <td class="gold-text">{{ player.achievementPoints | number }}</td>
+        <td>{{ player.honorableKills | number }}</td>
+        <td>{{ player.timePlayed }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
