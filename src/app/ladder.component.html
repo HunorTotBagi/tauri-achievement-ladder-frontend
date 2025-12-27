@@ -2,7 +2,7 @@
   <div class="ladder-header">
     <button (click)="setSort('achievementPoints')" [class.active]="currentSort === 'achievementPoints'">Achievement points</button>
     <button (click)="setSort('honorableKills')" [class.active]="currentSort === 'honorableKills'">Honorable kills</button>
-    <button (click)="setSort('timePlayed')" [class.active]="currentSort === 'timePlayed'">Time played</button>
+    
   </div>
 
   <table class="wow-table">
@@ -15,7 +15,7 @@
         <th>Guild</th>
         <th>Achievement points</th>
         <th>Honorable kills</th>
-        <th>Time played</th>
+        
       </tr>
     </thead>
     <tbody>
@@ -30,7 +30,7 @@
         <td>{{ player.guild }}</td>
         <td class="gold-text">{{ player.achievementPoints | number }}</td>
         <td>{{ player.honorableKills | number }}</td>
-        <td>{{ player.timePlayed }}</td>
+        
       </tr>
     </tbody>
   </table>

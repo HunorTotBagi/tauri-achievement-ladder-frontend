@@ -7,6 +7,5 @@ export interface PlayerAchievement {
   guild: string;
   achievementPoints: number;
   honorableKills: number;
-  timePlayed: string;
   faction: 'horde' | 'alliance' | 'neutral'; 
 }

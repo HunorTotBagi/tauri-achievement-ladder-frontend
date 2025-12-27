@@ -34,7 +34,6 @@ export class AchievementLadderComponent implements OnInit {
         guild: 'Outlaws',
         achievementPoints: 19135,
         honorableKills: 342,
-        timePlayed: '45d 12h',
         faction: 'alliance'
       },
       {
@@ -46,7 +45,6 @@ export class AchievementLadderComponent implements OnInit {
         guild: 'Outlaws',
         achievementPoints: 19035,
         honorableKills: 298,
-        timePlayed: '42d 8h',
         faction: 'alliance'
       },
       {
@@ -58,7 +56,6 @@ export class AchievementLadderComponent implements OnInit {
         guild: 'Leviathan',
         achievementPoints: 18935,
         honorableKills: 287,
-        timePlayed: '38d 16h',
         faction: 'alliance'
       },
       {
@@ -70,7 +67,6 @@ export class AchievementLadderComponent implements OnInit {
         guild: 'Mythic',
         achievementPoints: 18900,
         honorableKills: 256,
-        timePlayed: '35d 4h',
         faction: 'horde'
       },
       {
@@ -82,7 +78,6 @@ export class AchievementLadderComponent implements OnInit {
         guild: 'Outlaws',
         achievementPoints: 18880,
         honorableKills: 219,
-        timePlayed: '32d 20h',
         faction: 'alliance'
       }
     ];
