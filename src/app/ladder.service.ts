@@ -16,11 +16,13 @@ export interface LadderAchievement {
 
 @Injectable({ providedIn: 'root' })
 export class LadderService {
-  private apiUrl = 'http://localhost:5000/api/ladder/sorted/achievements';
-
   constructor(private http: HttpClient) {}
 
   getAchievements(): Observable<LadderAchievement[]> {
-    return this.http.get<LadderAchievement[]>(this.apiUrl);
+    return this.http.get<LadderAchievement[]>('http://localhost:5000/api/ladder/sorted/achievements');
   }
+
+  getHonorableKills(): Observable<LadderAchievement[]> {
+  return this.http.get<LadderAchievement[]>('http://localhost:5000/api/ladder/sorted/honorableKills');
+}
 }
