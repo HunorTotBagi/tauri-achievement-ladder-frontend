@@ -16,38 +16,38 @@ export class AchievementLadderComponent implements OnInit {
 
   constructor(private ladderService: LadderService) {}
 
-ngOnInit() {
-  this.ladderService.getAchievements().subscribe(data => {
-    this.updatePlayers(data);
-  });
-}
+  ngOnInit() {
+    this.loadPlayers();
+  }
 
-setSort(criterion: string) {
-  this.currentSort = criterion;
-  if (criterion === 'achievementPoints') {
-    this.ladderService.getAchievements().subscribe(data => {
-      this.updatePlayers(data);
-    });
-  } else if (criterion === 'honorableKills') {
-    this.ladderService.getHonorableKills().subscribe(data => {
+  setSort(criterion: string) {
+    this.currentSort = criterion;
+    this.loadPlayers();
+  }
+
+  private loadPlayers() {
+    const observable = this.currentSort === 'achievementPoints'
+      ? this.ladderService.getAchievements()
+      : this.ladderService.getHonorableKills();
+    
+    observable.subscribe(data => {
       this.updatePlayers(data);
     });
   }
-}
 
-private updatePlayers(data: any[]) {
-  this.players = data.map((item, idx) => ({
-    rank: idx + 1,
-    name: item.name,
-    realm: item.realm,
-    raceIcon: this.getRaceIcon(item.race),
-    classIcon: this.getClassIcon(item.class),
-    guild: item.guild,
-    achievementPoints: item.achievementPoints,
-    honorableKills: item.honorableKills,
-    faction: item.faction
-  }));
-}
+  private updatePlayers(data: any[]) {
+    this.players = data.map((item, idx) => ({
+      rank: idx + 1,
+      name: item.name,
+      realm: item.realm,
+      raceIcon: this.getRaceIcon(item.race),
+      classIcon: this.getClassIcon(item.class),
+      guild: item.guild,
+      achievementPoints: item.achievementPoints,
+      honorableKills: item.honorableKills,
+      faction: item.faction
+    }));
+  }
 
   getRaceIcon(race: number): string {
     // Map race number to emoji or image path
