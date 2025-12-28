@@ -11,6 +11,7 @@ export interface LadderAchievement {
   guild: string;
   achievementPoints: number;
   honorableKills: number;
+  faction: 'Horde' | 'Alliance';
 }
 
 @Injectable({ providedIn: 'root' })

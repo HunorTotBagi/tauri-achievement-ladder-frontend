@@ -7,5 +7,5 @@ export interface PlayerAchievement {
   guild: string;
   achievementPoints: number;
   honorableKills: number;
-  faction: 'horde' | 'alliance' | 'neutral'; 
+  faction: 'Horde' | 'Alliance'; 
 }

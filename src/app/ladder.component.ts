@@ -27,7 +27,7 @@ export class AchievementLadderComponent implements OnInit {
         guild: item.guild,
         achievementPoints: item.achievementPoints,
         honorableKills: item.honorableKills,
-        faction: this.getFaction(item.race)
+        faction: item.faction
       }));
     });
   }
@@ -61,12 +61,5 @@ export class AchievementLadderComponent implements OnInit {
       // Add more mappings as needed
     };
     return classIcons[cls] || '';
-  }
-
-  getFaction(race: number): 'horde' | 'alliance' | 'neutral' {
-    // Example mapping, adjust as needed
-    if ([1, 3, 4].includes(race)) return 'alliance';
-    if ([2, 5].includes(race)) return 'horde';
-    return 'neutral';
   }
 }
