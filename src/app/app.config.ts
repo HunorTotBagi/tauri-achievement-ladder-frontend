@@ -9,6 +9,7 @@ import {
   withViewTransitions
 } from '@angular/router';
 import { IconSetService } from '@coreui/icons-angular';
+import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -26,7 +27,8 @@ export const appConfig: ApplicationConfig = {
       withHashLocation()
     ),
     IconSetService,
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient()
   ]
 };
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlayerAchievement } from './models/achievement.model';
+import { LadderService } from './ladder.service';
 
 @Component({
   selector: 'app-achievement-ladder',
@@ -13,73 +14,59 @@ export class AchievementLadderComponent implements OnInit {
   players: PlayerAchievement[] = [];
   currentSort: string = 'achievementPoints';
 
+  constructor(private ladderService: LadderService) {}
+
   ngOnInit() {
-    // Here you would call your backend service
-    this.players = this.getMockData(); 
+    this.ladderService.getAchievements().subscribe(data => {
+      this.players = data.map((item, idx) => ({
+        rank: idx + 1,
+        name: item.name,
+        realm: item.realm,
+        raceIcon: this.getRaceIcon(item.race),
+        classIcon: this.getClassIcon(item.class),
+        guild: item.guild,
+        achievementPoints: item.achievementPoints,
+        honorableKills: item.honorableKills,
+        faction: this.getFaction(item.race)
+      }));
+    });
   }
 
   setSort(criterion: string) {
     this.currentSort = criterion;
-    // Logic to re-fetch or re-sort data
+    // Optionally re-sort players array here
   }
 
-  getMockData(): PlayerAchievement[] {
-    return [
-      {
-        rank: 1,
-        name: 'Larahhh',
-        realm: 'Tauri',
-        raceIcon: '⚔️',
-        classIcon: '🗡️',
-        guild: 'Outlaws',
-        achievementPoints: 19135,
-        honorableKills: 342,
-        faction: 'alliance'
-      },
-      {
-        rank: 2,
-        name: 'Hupap',
-        realm: 'Tauri',
-        raceIcon: '✨',
-        classIcon: '☀️',
-        guild: 'Outlaws',
-        achievementPoints: 19035,
-        honorableKills: 298,
-        faction: 'alliance'
-      },
-      {
-        rank: 3,
-        name: 'Spuky',
-        realm: 'Evermoon',
-        raceIcon: '🌙',
-        classIcon: '🗡️',
-        guild: 'Leviathan',
-        achievementPoints: 18935,
-        honorableKills: 287,
-        faction: 'alliance'
-      },
-      {
-        rank: 4,
-        name: 'Arrchangel',
-        realm: 'WoD',
-        raceIcon: '✨',
-        classIcon: '🔮',
-        guild: 'Mythic',
-        achievementPoints: 18900,
-        honorableKills: 256,
-        faction: 'horde'
-      },
-      {
-        rank: 5,
-        name: 'Asamoschra',
-        realm: 'Tauri',
-        raceIcon: '⚒️',
-        classIcon: '🛡️',
-        guild: 'Outlaws',
-        achievementPoints: 18880,
-        honorableKills: 219,
-        faction: 'alliance'
-      }
-    ];
+  getRaceIcon(race: number): string {
+    // Map race number to emoji or image path
+    const raceIcons: { [key: number]: string } = {
+      1: '⚔️', // Example
+      2: '✨',
+      3: '🌙',
+      4: '🛡️',
+      5: '🔮',
+      // Add more mappings as needed
+    };
+    return raceIcons[race] || '';
+  }
+
+  getClassIcon(cls: number): string {
+    // Map class number to emoji or image path
+    const classIcons: { [key: number]: string } = {
+      1: '🗡️',
+      2: '☀️',
+      3: '🛡️',
+      4: '🔮',
+      11: '⚒️',
+      // Add more mappings as needed
+    };
+    return classIcons[cls] || '';
+  }
+
+  getFaction(race: number): 'horde' | 'alliance' | 'neutral' {
+    // Example mapping, adjust as needed
+    if ([1, 3, 4].includes(race)) return 'alliance';
+    if ([2, 5].includes(race)) return 'horde';
+    return 'neutral';
   }
 }
