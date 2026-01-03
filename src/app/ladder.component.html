@@ -21,7 +21,13 @@
         <td>{{ player.rank }}</td>
         <td class="player-name">{{ player.name }}</td>
         <td>
-          <span class="icon">{{ player.raceIcon }}</span>
+          <img 
+            [src]="player.raceIcon"
+            [alt]="'Race ' + player.race + '-' + player.gender"
+            class="icon race-icon"
+            loading="lazy"
+            (error)="onImageError($event)"
+          />
           <img 
             [src]="getClassIconPath(player.classIcon)" 
             [alt]="'Class ' + player.classIcon"

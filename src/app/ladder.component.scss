@@ -53,7 +53,8 @@
   vertical-align: middle;
   flex-shrink: 0;
 
-  &.class-icon {
+  &.class-icon,
+  &.race-icon {
     object-fit: contain;
   }
 }

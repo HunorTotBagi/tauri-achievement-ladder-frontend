@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PlayerAchievement } from './models/achievement.model';
 import { LadderService } from './ladder.service';
 import { getClassIconPath } from '../utils/classIconHelper';
+import { getRaceIconPath } from '../utils/raceIconHelper';
 
 @Component({
   selector: 'app-achievement-ladder',
@@ -42,24 +43,15 @@ export class AchievementLadderComponent implements OnInit {
       rank: idx + 1,
       name: item.name,
       realm: item.realm,
-      raceIcon: this.getRaceIcon(item.race),
+      race: item.race,
+      gender: item.gender,
+      raceIcon: getRaceIconPath(item.race, item.gender),
       classIcon: item.class.toString(),
       guild: item.guild,
       achievementPoints: item.achievementPoints,
       honorableKills: item.honorableKills,
       faction: item.faction
     }));
-  }
-
-  getRaceIcon(race: number): string {
-    const raceIcons: { [key: number]: string } = {
-      1: '⚔️',
-      2: '✨',
-      3: '🌙',
-      4: '🛡️',
-      5: '🔮',
-    };
-    return raceIcons[race] || '';
   }
 
   onImageError(event: any) {
