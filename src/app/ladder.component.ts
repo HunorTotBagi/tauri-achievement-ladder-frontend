@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlayerAchievement } from './models/achievement.model';
 import { LadderService } from './ladder.service';
+import { getClassIconPath } from '../utils/classIconHelper';
+import { getRaceIconPath } from '../utils/raceIconHelper';
 
 @Component({
   selector: 'app-achievement-ladder',
@@ -13,6 +15,7 @@ import { LadderService } from './ladder.service';
 export class AchievementLadderComponent implements OnInit {
   players: PlayerAchievement[] = [];
   currentSort: string = 'achievementPoints';
+  getClassIconPath = getClassIconPath;
 
   constructor(private ladderService: LadderService) {}
 
@@ -40,8 +43,10 @@ export class AchievementLadderComponent implements OnInit {
       rank: idx + 1,
       name: item.name,
       realm: item.realm,
-      raceIcon: this.getRaceIcon(item.race),
-      classIcon: this.getClassIcon(item.class),
+      race: item.race,
+      gender: item.gender,
+      raceIcon: getRaceIconPath(item.race, item.gender),
+      classIcon: item.class.toString(),
       guild: item.guild,
       achievementPoints: item.achievementPoints,
       honorableKills: item.honorableKills,
@@ -49,29 +54,7 @@ export class AchievementLadderComponent implements OnInit {
     }));
   }
 
-  getRaceIcon(race: number): string {
-    // Map race number to emoji or image path
-    const raceIcons: { [key: number]: string } = {
-      1: '⚔️', // Example
-      2: '✨',
-      3: '🌙',
-      4: '🛡️',
-      5: '🔮',
-      // Add more mappings as needed
-    };
-    return raceIcons[race] || '';
-  }
-
-  getClassIcon(cls: number): string {
-    // Map class number to emoji or image path
-    const classIcons: { [key: number]: string } = {
-      1: '🗡️',
-      2: '☀️',
-      3: '🛡️',
-      4: '🔮',
-      11: '⚒️',
-      // Add more mappings as needed
-    };
-    return classIcons[cls] || '';
+  onImageError(event: any) {
+    console.error('Failed to load image:', event.target.src);
   }
 }
