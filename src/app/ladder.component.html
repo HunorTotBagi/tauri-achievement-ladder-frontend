@@ -46,12 +46,14 @@
       <tr *ngFor="let player of players" [ngClass]="player.faction">
         <td>{{ player.rank }}</td>
         <td>
-          <span 
+          <a 
             class="player-name clickable" 
-            (click)="openArmory(player.name, player.realm)"
+            [href]="getArmoryUrl(player.name, player.realm)"
+            target="_blank"
+            rel="noopener noreferrer"
             [title]="'Open ' + player.name + ' armory'">
             {{ player.name }}
-          </span>
+          </a>
         </td>
         <td>
           <img 
@@ -71,9 +73,9 @@
         </td>
         <td>{{ player.realm }}</td>
         <td>{{ player.guild }}</td>
-        <td class="gold-text">{{ player.achievementPoints | number }}</td>
-        <td>{{ player.honorableKills | number }}</td>
-      </tr>
-    </tbody>
+      </tr> class="gold-text">{{ player.achievementPoints | number }}</td>
+    </tbody>{{ player.honorableKills | number }}</td>
+  </table>>
+</div>tbody>
   </table>
 </div>

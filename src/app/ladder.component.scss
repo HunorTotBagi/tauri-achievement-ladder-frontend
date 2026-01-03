@@ -243,12 +243,12 @@
   &.clickable {
     cursor: pointer;
     transition: all 0.2s ease;
-    text-decoration: underline;
-    text-decoration-color: transparent;
+    text-decoration: none;
+    display: inline-block;
     
     &:hover {
       color: #ffd700;
-      text-decoration-color: #ffd700;
+      text-decoration: underline;
       text-shadow: 0 0 8px rgba(255,215,0,0.5);
     }
     
