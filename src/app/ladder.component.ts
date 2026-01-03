@@ -4,6 +4,7 @@ import { PlayerAchievement } from './models/achievement.model';
 import { LadderService } from './ladder.service';
 import { getClassIconPath } from '../utils/classIconHelper';
 import { getRaceIconPath } from '../utils/raceIconHelper';
+import { openArmory } from '../utils/armory';
 
 @Component({
   selector: 'app-achievement-ladder',
@@ -18,6 +19,7 @@ export class AchievementLadderComponent implements OnInit {
   currentRealm?: string = 'Evermoon';
   currentFaction?: string;
   getClassIconPath = getClassIconPath;
+  openArmory = openArmory;
 
   constructor(private ladderService: LadderService) {}
 
