@@ -25,7 +25,13 @@ export class AchievementLadderComponent implements OnInit {
     this.applyFilters();
   }
 
-  applyFilters() {
+  applyFilters(sortSelect?: HTMLSelectElement, realmSelect?: HTMLSelectElement, factionSelect?: HTMLSelectElement) {
+    // If select elements are passed, read values directly from them
+    if (sortSelect) {
+      this.currentSort = sortSelect.value;
+      this.currentRealm = realmSelect?.value ? realmSelect.value : undefined;
+      this.currentFaction = factionSelect?.value ? factionSelect.value : undefined;
+    }
     this.loadPlayers();
   }
 
