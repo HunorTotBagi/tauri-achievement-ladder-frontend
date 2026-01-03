@@ -4,7 +4,7 @@ An Angular single-page UI that renders a World of Warcraft–style leaderboard. 
 
 The backend application for this project is developed separately and can be found here: [Tauri Achievement Ladder - Backend](https://github.com/HunorTotBagi/tauri-achievement-ladder-backend)
 
-<img width="976" height="704" alt="image" src="https://github.com/user-attachments/assets/14d10d37-abbb-4314-a3c6-7bf09e3889c6" />
+![ezgif-479fbd953fdaf5b3](https://github.com/user-attachments/assets/4215a132-ca75-4fbe-b831-0c14444ce303)
 
 ## Background & Motivation
 
@@ -25,56 +25,3 @@ This project aims to recreate and modernize the original ladder system, restorin
 - CoreUI 5 for styling primitives
 - RxJS + HttpClient for data fetching
 - SCSS for theming
-
-## Expected API
-The frontend expects a backend reachable at `http://localhost:5000` exposing:
-
-- `GET /api/ladder/sorted/achievements` → array of `LadderAchievement`
-- `GET /api/ladder/sorted/honorableKills` → array of `LadderAchievement`
-
-`LadderAchievement` shape (see `src/app/ladder.service.ts`):
-
-```ts
-interface LadderAchievement {
-	name: string;
-	race: number;
-	gender: number;
-	class: number;
-	realm: string;
-	guild: string;
-	achievementPoints: number;
-	honorableKills: number;
-	faction: 'Horde' | 'Alliance';
-}
-```
-
-## Getting Started
-
-### Prerequisites
-- Node.js 20+ (tested with the engines listed in `package.json`)
-- npm 10+
-- (Optional) Angular CLI globally: `npm install -g @angular/cli`
-
-### Install
-```bash
-npm install
-```
-
-### Run (dev server)
-```bash
-npm start
-```
-This runs `ng serve -o` on the default Angular port. Ensure your backend is running on the expected host/port.
-
-### Build (production)
-```bash
-npm run build
-```
-Outputs an optimized build to `dist/`.
-
-## Project Structure
-- `src/app/ladder.component.ts` — standalone component rendering the ladder table and handling sort toggles.
-- `src/app/ladder.component.html` — table markup and bindings.
-- `src/app/ladder.component.scss` — WoW-inspired styles and faction color cues.
-- `src/app/ladder.service.ts` — HTTP calls to the ladder endpoints.
-- `src/app/models/achievement.model.ts` — typed player model used by the component.
