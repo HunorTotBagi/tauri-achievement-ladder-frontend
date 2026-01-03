@@ -18,11 +18,25 @@ export interface LadderAchievement {
 export class LadderService {
   constructor(private http: HttpClient) {}
 
-  getAchievements(): Observable<LadderAchievement[]> {
-    return this.http.get<LadderAchievement[]>('http://localhost:5000/api/ladder/sorted/achievements');
+  getAchievements(realm?: string, faction?: string, pageNumber: number = 1, pageSize: number = 100): Observable<LadderAchievement[]> {
+    let url = `http://localhost:5000/api/ladder/sorted/achievements?pageNumber=${pageNumber}&pageSize=${pageSize}`;
+    if (realm) {
+      url += `&realm=${realm}`;
+    }
+    if (faction) {
+      url += `&faction=${faction}`;
+    }
+    return this.http.get<LadderAchievement[]>(url);
   }
 
-  getHonorableKills(): Observable<LadderAchievement[]> {
-  return this.http.get<LadderAchievement[]>('http://localhost:5000/api/ladder/sorted/honorableKills');
-}
+  getHonorableKills(realm?: string, faction?: string, pageNumber: number = 1, pageSize: number = 100): Observable<LadderAchievement[]> {
+    let url = `http://localhost:5000/api/ladder/sorted/honorableKills?pageNumber=${pageNumber}&pageSize=${pageSize}`;
+    if (realm) {
+      url += `&realm=${realm}`;
+    }
+    if (faction) {
+      url += `&faction=${faction}`;
+    }
+    return this.http.get<LadderAchievement[]>(url);
+  }
 }

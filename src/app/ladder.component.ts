@@ -15,23 +15,30 @@ import { getRaceIconPath } from '../utils/raceIconHelper';
 export class AchievementLadderComponent implements OnInit {
   players: PlayerAchievement[] = [];
   currentSort: string = 'achievementPoints';
+  currentRealm?: string = 'Evermoon';
+  currentFaction?: string;
   getClassIconPath = getClassIconPath;
 
   constructor(private ladderService: LadderService) {}
 
   ngOnInit() {
-    this.loadPlayers();
+    this.applyFilters();
   }
 
-  setSort(criterion: string) {
-    this.currentSort = criterion;
+  applyFilters(sortSelect?: HTMLSelectElement, realmSelect?: HTMLSelectElement, factionSelect?: HTMLSelectElement) {
+    // If select elements are passed, read values directly from them
+    if (sortSelect) {
+      this.currentSort = sortSelect.value;
+      this.currentRealm = realmSelect?.value ? realmSelect.value : undefined;
+      this.currentFaction = factionSelect?.value ? factionSelect.value : undefined;
+    }
     this.loadPlayers();
   }
 
   private loadPlayers() {
     const observable = this.currentSort === 'achievementPoints'
-      ? this.ladderService.getAchievements()
-      : this.ladderService.getHonorableKills();
+      ? this.ladderService.getAchievements(this.currentRealm, this.currentFaction)
+      : this.ladderService.getHonorableKills(this.currentRealm, this.currentFaction);
     
     observable.subscribe(data => {
       this.updatePlayers(data);
