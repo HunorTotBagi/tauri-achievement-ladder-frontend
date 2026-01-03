@@ -45,7 +45,16 @@
     <tbody>
       <tr *ngFor="let player of players" [ngClass]="player.faction">
         <td>{{ player.rank }}</td>
-        <td class="player-name">{{ player.name }}</td>
+        <td>
+          <a 
+            class="player-name clickable" 
+            [href]="getArmoryUrl(player.name, player.realm)"
+            target="_blank"
+            rel="noopener noreferrer"
+            [title]="'Open ' + player.name + ' armory'">
+            {{ player.name }}
+          </a>
+        </td>
         <td>
           <img 
             [src]="player.raceIcon"
@@ -63,7 +72,18 @@
           />
         </td>
         <td>{{ player.realm }}</td>
-        <td>{{ player.guild }}</td>
+        <td>
+          <a 
+            *ngIf="player.guild"
+            class="guild-name clickable" 
+            [href]="getGuildArmoryUrl(player.guild, player.realm)"
+            target="_blank"
+            rel="noopener noreferrer"
+            [title]="'Open ' + player.guild + ' guild page'">
+            {{ player.guild }}
+          </a>
+          <span *ngIf="!player.guild">-</span>
+        </td>
         <td class="gold-text">{{ player.achievementPoints | number }}</td>
         <td>{{ player.honorableKills | number }}</td>
       </tr>
