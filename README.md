@@ -1,10 +1,10 @@
 # Tauri Achievement Ladder (Frontend)
 
-An Angular single-page UI that renders a World of Warcraft–style leaderboard. Players can be ranked by achievement points or honorable kills, with faction-aware row styling and simple race/class iconography (work in progress).
+An Angular single-page UI that renders a World of Warcraft–style leaderboard. Players can be ranked by achievement points or honorable kills, with faction-aware row styling and simple race/class iconography.
 
 The backend application for this project is developed separately and can be found here: [Tauri Achievement Ladder - Backend](https://github.com/HunorTotBagi/tauri-achievement-ladder-backend)
 
-![Ladder preview](https://github.com/user-attachments/assets/c9b1520a-ec10-4fb6-876c-94c83a8a82ba)
+<img width="976" height="704" alt="image" src="https://github.com/user-attachments/assets/14d10d37-abbb-4314-a3c6-7bf09e3889c6" />
 
 ## Background & Motivation
 
