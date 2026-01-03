@@ -1,7 +1,33 @@
 <div class="ladder-container">
   <div class="ladder-header">
-    <button (click)="setSort('achievementPoints')" [class.active]="currentSort === 'achievementPoints'">Achievement points</button>
-    <button (click)="setSort('honorableKills')" [class.active]="currentSort === 'honorableKills'">Honorable kills</button>
+    <div class="filter-group">
+      <label for="sortSelect" class="filter-label">Sort by:</label>
+      <select id="sortSelect" [(ngModel)]="currentSort" class="filter-select">
+        <option value="achievementPoints">Achievement Points</option>
+        <option value="honorableKills">Honorable Kills</option>
+      </select>
+    </div>
+    
+    <div class="filter-group">
+      <label for="realmSelect" class="filter-label">Realm:</label>
+      <select id="realmSelect" [(ngModel)]="currentRealm" class="filter-select">
+        <option [ngValue]="undefined">All Realms</option>
+        <option value="Evermoon">Evermoon</option>
+        <option value="Tauri">Tauri</option>
+        <option value="WoD">WoD</option>
+      </select>
+    </div>
+    
+    <div class="filter-group">
+      <label for="factionSelect" class="filter-label">Faction:</label>
+      <select id="factionSelect" [(ngModel)]="currentFaction" class="filter-select">
+        <option [ngValue]="undefined">All Factions</option>
+        <option value="Horde">Horde</option>
+        <option value="Alliance">Alliance</option>
+      </select>
+    </div>
+    
+    <button (click)="applyFilters()" class="filter-button">Filter</button>
   </div>
 
   <table class="wow-table">

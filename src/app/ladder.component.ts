@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { PlayerAchievement } from './models/achievement.model';
 import { LadderService } from './ladder.service';
 import { getClassIconPath } from '../utils/classIconHelper';
@@ -10,28 +11,29 @@ import { getRaceIconPath } from '../utils/raceIconHelper';
   templateUrl: './ladder.component.html',
   styleUrls: ['./ladder.component.scss'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, FormsModule]
 })
 export class AchievementLadderComponent implements OnInit {
   players: PlayerAchievement[] = [];
   currentSort: string = 'achievementPoints';
+  currentRealm?: string = 'Evermoon';
+  currentFaction?: string;
   getClassIconPath = getClassIconPath;
 
   constructor(private ladderService: LadderService) {}
 
   ngOnInit() {
-    this.loadPlayers();
+    this.applyFilters();
   }
 
-  setSort(criterion: string) {
-    this.currentSort = criterion;
+  applyFilters() {
     this.loadPlayers();
   }
 
   private loadPlayers() {
     const observable = this.currentSort === 'achievementPoints'
-      ? this.ladderService.getAchievements()
-      : this.ladderService.getHonorableKills();
+      ? this.ladderService.getAchievements(this.currentRealm, this.currentFaction)
+      : this.ladderService.getHonorableKills(this.currentRealm, this.currentFaction);
     
     observable.subscribe(data => {
       this.updatePlayers(data);
