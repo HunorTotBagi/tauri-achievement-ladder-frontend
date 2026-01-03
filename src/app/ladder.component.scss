@@ -258,6 +258,28 @@
   }
 }
 
+.guild-name {
+  color: #e0e0e0;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  
+  &.clickable {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    
+    &:hover {
+      color: #ffd700;
+      text-decoration: underline;
+      text-shadow: 0 0 8px rgba(255,215,0,0.5);
+    }
+    
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
 .gold-text {
   color: #ffd700;
   font-weight: 700;

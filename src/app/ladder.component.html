@@ -72,7 +72,18 @@
           />
         </td>
         <td>{{ player.realm }}</td>
-        <td>{{ player.guild }}</td>
+        <td>
+          <a 
+            *ngIf="player.guild"
+            class="guild-name clickable" 
+            [href]="getGuildArmoryUrl(player.guild, player.realm)"
+            target="_blank"
+            rel="noopener noreferrer"
+            [title]="'Open ' + player.guild + ' guild page'">
+            {{ player.guild }}
+          </a>
+          <span *ngIf="!player.guild">-</span>
+        </td>
         <td class="gold-text">{{ player.achievementPoints | number }}</td>
         <td>{{ player.honorableKills | number }}</td>
       </tr>

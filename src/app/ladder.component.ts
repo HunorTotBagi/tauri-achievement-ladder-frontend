@@ -4,7 +4,7 @@ import { PlayerAchievement } from './models/achievement.model';
 import { LadderService } from './ladder.service';
 import { getClassIconPath } from '../utils/classIconHelper';
 import { getRaceIconPath } from '../utils/raceIconHelper';
-import { openArmory, getArmoryUrl } from '../utils/armory';
+import { openArmory, getArmoryUrl, getGuildArmoryUrl } from '../utils/armory';
 
 @Component({
   selector: 'app-achievement-ladder',
@@ -21,6 +21,7 @@ export class AchievementLadderComponent implements OnInit {
   getClassIconPath = getClassIconPath;
   openArmory = openArmory;
   getArmoryUrl = getArmoryUrl;
+  getGuildArmoryUrl = getGuildArmoryUrl;
 
   constructor(private ladderService: LadderService) {}
 
