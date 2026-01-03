@@ -82,7 +82,6 @@
             [title]="'Open ' + player.guild + ' guild page'">
             {{ player.guild }}
           </a>
-          <span *ngIf="!player.guild">-</span>
         </td>
         <td class="gold-text">{{ player.achievementPoints | number }}</td>
         <td>{{ player.honorableKills | number }}</td>
