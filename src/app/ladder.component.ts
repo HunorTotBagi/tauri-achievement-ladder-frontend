@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { PlayerAchievement } from './models/achievement.model';
 import { LadderService } from './ladder.service';
 import { getClassIconPath } from '../utils/classIconHelper';
@@ -11,7 +10,7 @@ import { getRaceIconPath } from '../utils/raceIconHelper';
   templateUrl: './ladder.component.html',
   styleUrls: ['./ladder.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule]
 })
 export class AchievementLadderComponent implements OnInit {
   players: PlayerAchievement[] = [];

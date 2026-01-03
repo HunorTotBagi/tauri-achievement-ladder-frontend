@@ -2,7 +2,7 @@
   <div class="ladder-header">
     <div class="filter-group">
       <label for="sortSelect" class="filter-label">Sort by:</label>
-      <select id="sortSelect" [(ngModel)]="currentSort" class="filter-select">
+      <select id="sortSelect" [value]="currentSort" (change)="currentSort = $any($event.target).value" class="filter-select">
         <option value="achievementPoints">Achievement Points</option>
         <option value="honorableKills">Honorable Kills</option>
       </select>
@@ -10,8 +10,8 @@
     
     <div class="filter-group">
       <label for="realmSelect" class="filter-label">Realm:</label>
-      <select id="realmSelect" [(ngModel)]="currentRealm" class="filter-select">
-        <option [ngValue]="undefined">All Realms</option>
+      <select id="realmSelect" [value]="currentRealm || ''" (change)="currentRealm = $any($event.target).value || undefined" class="filter-select">
+        <option value="">All Realms</option>
         <option value="Evermoon">Evermoon</option>
         <option value="Tauri">Tauri</option>
         <option value="WoD">WoD</option>
@@ -20,14 +20,14 @@
     
     <div class="filter-group">
       <label for="factionSelect" class="filter-label">Faction:</label>
-      <select id="factionSelect" [(ngModel)]="currentFaction" class="filter-select">
-        <option [ngValue]="undefined">All Factions</option>
+      <select id="factionSelect" [value]="currentFaction || ''" (change)="currentFaction = $any($event.target).value || undefined" class="filter-select">
+        <option value="">All Factions</option>
         <option value="Horde">Horde</option>
         <option value="Alliance">Alliance</option>
       </select>
     </div>
     
-    <button (click)="applyFilters()" class="filter-button">Filter</button>
+    <button type="button" (click)="applyFilters()" class="filter-button">Filter</button>
   </div>
 
   <table class="wow-table">
