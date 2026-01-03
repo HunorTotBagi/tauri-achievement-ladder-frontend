@@ -44,6 +44,20 @@
   box-shadow: 0 0 0 4px rgba(247,181,0,0.06);
 }
 
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+  border: 1px solid #444;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+
+  &.class-icon {
+    object-fit: contain;
+  }
+}
+
 .wow-table {
   width: 100%;
   border-collapse: collapse;
@@ -75,6 +89,13 @@
   td {
     padding: 12px 15px;
     border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: middle;
+
+    &:nth-child(3) {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
 
     &:nth-child(6),
     &:nth-child(7),
@@ -87,11 +108,4 @@
 .gold-text {
   color: #f7b500;
   font-weight: bold;
-}
-
-.icon {
-  width: 24px;
-  height: 24px;
-  margin-right: 4px;
-  border: 1px solid #444;
 }
