@@ -21,20 +21,22 @@
         <td>{{ player.rank }}</td>
         <td class="player-name">{{ player.name }}</td>
         <td>
-          <img 
-            [src]="player.raceIcon"
-            [alt]="'Race ' + player.race + '-' + player.gender"
-            class="icon race-icon"
-            loading="lazy"
-            (error)="onImageError($event)"
-          />
-          <img 
-            [src]="getClassIconPath(player.classIcon)" 
-            [alt]="'Class ' + player.classIcon"
-            class="icon class-icon"
-            loading="lazy"
-            (error)="onImageError($event)"
-          />
+          <span class="icons-container">
+            <img 
+              [src]="player.raceIcon"
+              [alt]="'Race ' + player.race + '-' + player.gender"
+              class="icon race-icon"
+              loading="lazy"
+              (error)="onImageError($event)"
+            />
+            <img 
+              [src]="getClassIconPath(player.classIcon)" 
+              [alt]="'Class ' + player.classIcon"
+              class="icon class-icon"
+              loading="lazy"
+              (error)="onImageError($event)"
+            />
+          </span>
         </td>
         <td>{{ player.realm }}</td>
         <td>{{ player.guild }}</td>

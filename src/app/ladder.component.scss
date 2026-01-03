@@ -273,12 +273,6 @@
     font-size: 0.95rem;
     transition: all 0.2s ease;
 
-    &:nth-child(3) {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
     &:nth-child(6),
     &:nth-child(7) {
       text-align: center;
@@ -290,6 +284,12 @@
       color: rgba(247,181,0,0.8);
       font-size: 1rem;
     }
+  }
+
+  .icons-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
 
   tbody tr {
