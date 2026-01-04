@@ -4,7 +4,7 @@ An Angular single-page UI that renders a World of Warcraft–style leaderboard. 
 
 The backend application for this project can be found here: [Tauri Achievement Ladder - Backend](https://github.com/HunorTotBagi/tauri-achievement-ladder-backend)
 
-![ezgif-479fbd953fdaf5b3](https://github.com/user-attachments/assets/4215a132-ca75-4fbe-b831-0c14444ce303)
+![ezgif-2888cf5aa00f29f8](https://github.com/user-attachments/assets/dd93d758-f477-40c5-b8d0-ded78b49dd57)
 
 ## Background & Motivation
 
