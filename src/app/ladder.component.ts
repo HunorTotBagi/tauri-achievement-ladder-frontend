@@ -55,11 +55,20 @@ export class AchievementLadderComponent implements OnInit {
       this.currentRealm = realmSelect?.value ? realmSelect.value : undefined;
       this.currentFaction = factionSelect?.value ? factionSelect.value : undefined;
     }
+    this.closeAllDropdowns();
     this.loadPlayers();
   }
 
+  closeAllDropdowns(except?: 'class') {
+    if (except !== 'class') {
+      this.classMenuOpen = false;
+    }
+  }
+
   toggleClassMenu() {
-    this.classMenuOpen = !this.classMenuOpen;
+    const nextState = !this.classMenuOpen;
+    this.closeAllDropdowns('class');
+    this.classMenuOpen = nextState;
   }
 
   selectClass(option?: { id: number; name: string; icon: string }) {

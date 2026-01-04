@@ -2,7 +2,7 @@
   <div class="ladder-header">
     <div class="filter-group">
       <label for="sortSelect" class="filter-label">Sort by:</label>
-      <select #sortSelect id="sortSelect" class="filter-select">
+      <select #sortSelect id="sortSelect" class="filter-select" (focus)="closeAllDropdowns()">
         <option value="achievementPoints">Achievement Points</option>
         <option value="honorableKills">Honorable Kills</option>
       </select>
@@ -10,7 +10,7 @@
     
     <div class="filter-group">
       <label for="realmSelect" class="filter-label">Realm:</label>
-      <select #realmSelect id="realmSelect" class="filter-select">
+      <select #realmSelect id="realmSelect" class="filter-select" (focus)="closeAllDropdowns()">
         <option value="">All Realms</option>
         <option value="Evermoon">Evermoon</option>
         <option value="Tauri">Tauri</option>
@@ -21,7 +21,7 @@
     <div class="filter-group">
       <label for="classSelect" class="filter-label">Class:</label>
       <div class="class-dropdown" [class.open]="classMenuOpen">
-        <button type="button" class="filter-select class-trigger" (click)="toggleClassMenu()">
+        <button type="button" class="filter-select class-trigger" (click)="toggleClassMenu()" (focus)="closeAllDropdowns('class')">
           <img *ngIf="selectedClassIcon" [src]="selectedClassIcon" alt="Selected class icon" class="option-icon" />
           <span *ngIf="!selectedClassIcon" class="option-icon placeholder"></span>
           <span class="option-label">{{ selectedClassLabel }}</span>
@@ -46,7 +46,7 @@
     
     <div class="filter-group">
       <label for="factionSelect" class="filter-label">Faction:</label>
-      <select #factionSelect id="factionSelect" class="filter-select">
+      <select #factionSelect id="factionSelect" class="filter-select" (focus)="closeAllDropdowns()">
         <option value="">All Factions</option>
         <option value="Horde">Horde</option>
         <option value="Alliance">Alliance</option>
