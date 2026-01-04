@@ -19,13 +19,37 @@ export class AchievementLadderComponent implements OnInit {
   currentRealm?: string = 'Evermoon';
   currentFaction?: string;
   currentClass?: number;
+  sortMenuOpen = false;
+  realmMenuOpen = false;
+  factionMenuOpen = false;
   classMenuOpen = false;
+  selectedSortLabel = 'Achievement Points';
+  selectedRealmLabel = 'All Realms';
+  selectedFactionLabel = 'All Factions';
   selectedClassLabel = 'All Classes';
   selectedClassIcon?: string;
   getClassIconPath = getClassIconPath;
   openArmory = openArmory;
   getArmoryUrl = getArmoryUrl;
   getGuildArmoryUrl = getGuildArmoryUrl;
+
+  sortOptions = [
+    { value: 'achievementPoints', label: 'Achievement Points' },
+    { value: 'honorableKills', label: 'Honorable Kills' }
+  ];
+
+  realmOptions = [
+    { value: undefined, label: 'All Realms' },
+    { value: 'Evermoon', label: 'Evermoon' },
+    { value: 'Tauri', label: 'Tauri' },
+    { value: 'WoD', label: 'WoD' },
+  ];
+
+  factionOptions = [
+    { value: undefined, label: 'All Factions' },
+    { value: 'Horde', label: 'Horde' },
+    { value: 'Alliance', label: 'Alliance' }
+  ];
 
   classOptions = [
     { id: 6, name: 'Death Knight', icon: getClassIconPath(6) },
@@ -48,27 +72,60 @@ export class AchievementLadderComponent implements OnInit {
     this.applyFilters();
   }
 
-  applyFilters(sortSelect?: HTMLSelectElement, realmSelect?: HTMLSelectElement, factionSelect?: HTMLSelectElement) {
-    // If select elements are passed, read values directly from them
-    if (sortSelect) {
-      this.currentSort = sortSelect.value;
-      this.currentRealm = realmSelect?.value ? realmSelect.value : undefined;
-      this.currentFaction = factionSelect?.value ? factionSelect.value : undefined;
-    }
-    this.closeAllDropdowns();
+  applyFilters() {
     this.loadPlayers();
   }
 
-  closeAllDropdowns(except?: 'class') {
-    if (except !== 'class') {
-      this.classMenuOpen = false;
-    }
+  closeAllDropdowns(except?: 'class' | 'sort' | 'realm' | 'faction') {
+    if (except !== 'class') this.classMenuOpen = false;
+    if (except !== 'sort') this.sortMenuOpen = false;
+    if (except !== 'realm') this.realmMenuOpen = false;
+    if (except !== 'faction') this.factionMenuOpen = false;
   }
 
   toggleClassMenu() {
     const nextState = !this.classMenuOpen;
     this.closeAllDropdowns('class');
     this.classMenuOpen = nextState;
+  }
+
+  toggleSortMenu() {
+    const nextState = !this.sortMenuOpen;
+    this.closeAllDropdowns('sort');
+    this.sortMenuOpen = nextState;
+  }
+
+  toggleRealmMenu() {
+    const nextState = !this.realmMenuOpen;
+    this.closeAllDropdowns('realm');
+    this.realmMenuOpen = nextState;
+  }
+
+  toggleFactionMenu() {
+    const nextState = !this.factionMenuOpen;
+    this.closeAllDropdowns('faction');
+    this.factionMenuOpen = nextState;
+  }
+
+  selectSort(option: { value: string; label: string }) {
+    this.currentSort = option.value;
+    this.selectedSortLabel = option.label;
+    this.sortMenuOpen = false;
+    this.applyFilters();
+  }
+
+  selectRealm(option: { value: string | undefined; label: string }) {
+    this.currentRealm = option.value;
+    this.selectedRealmLabel = option.label;
+    this.realmMenuOpen = false;
+    this.applyFilters();
+  }
+
+  selectFaction(option: { value: string | undefined; label: string }) {
+    this.currentFaction = option.value;
+    this.selectedFactionLabel = option.label;
+    this.factionMenuOpen = false;
+    this.applyFilters();
   }
 
   selectClass(option?: { id: number; name: string; icon: string }) {
