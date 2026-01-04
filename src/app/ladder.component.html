@@ -20,17 +20,28 @@
 
     <div class="filter-group">
       <label for="classSelect" class="filter-label">Class:</label>
-      <select #classSelect id="classSelect" class="filter-select">
-        <option value="">All Classes</option>
-        <option
-          *ngFor="let cls of classOptions"
-          class="class-option"
-          [style.backgroundImage]="'url(' + cls.icon + ')'
-          "
-          [value]="cls.id">
-          {{ cls.name }}
-        </option>
-      </select>
+      <div class="class-dropdown" [class.open]="classMenuOpen">
+        <button type="button" class="filter-select class-trigger" (click)="toggleClassMenu()">
+          <img *ngIf="selectedClassIcon" [src]="selectedClassIcon" alt="Selected class icon" class="option-icon" />
+          <span *ngIf="!selectedClassIcon" class="option-icon placeholder"></span>
+          <span class="option-label">{{ selectedClassLabel }}</span>
+          <span class="chevron">▾</span>
+        </button>
+        <div class="class-menu">
+          <button type="button" class="class-option" (click)="selectClass()">
+            <span class="option-icon placeholder"></span>
+            <span class="option-label">All Classes</span>
+          </button>
+          <button
+            type="button"
+            class="class-option"
+            *ngFor="let cls of classOptions"
+            (click)="selectClass(cls)">
+            <img [src]="cls.icon" [alt]="cls.name + ' icon'" class="option-icon" />
+            <span class="option-label">{{ cls.name }}</span>
+          </button>
+        </div>
+      </div>
     </div>
     
     <div class="filter-group">
@@ -42,7 +53,7 @@
       </select>
     </div>
     
-    <button type="button" (click)="applyFilters(sortSelect, realmSelect, classSelect, factionSelect)" class="filter-button">Filter</button>
+    <button type="button" (click)="applyFilters(sortSelect, realmSelect, factionSelect)" class="filter-button">Filter</button>
   </div>
 
   <table class="wow-table">

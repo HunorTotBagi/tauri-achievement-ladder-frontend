@@ -19,6 +19,9 @@ export class AchievementLadderComponent implements OnInit {
   currentRealm?: string = 'Evermoon';
   currentFaction?: string;
   currentClass?: number;
+  classMenuOpen = false;
+  selectedClassLabel = 'All Classes';
+  selectedClassIcon?: string;
   getClassIconPath = getClassIconPath;
   openArmory = openArmory;
   getArmoryUrl = getArmoryUrl;
@@ -45,15 +48,26 @@ export class AchievementLadderComponent implements OnInit {
     this.applyFilters();
   }
 
-  applyFilters(sortSelect?: HTMLSelectElement, realmSelect?: HTMLSelectElement, classSelect?: HTMLSelectElement, factionSelect?: HTMLSelectElement) {
+  applyFilters(sortSelect?: HTMLSelectElement, realmSelect?: HTMLSelectElement, factionSelect?: HTMLSelectElement) {
     // If select elements are passed, read values directly from them
     if (sortSelect) {
       this.currentSort = sortSelect.value;
       this.currentRealm = realmSelect?.value ? realmSelect.value : undefined;
-      this.currentClass = classSelect?.value ? parseInt(classSelect.value, 10) : undefined;
       this.currentFaction = factionSelect?.value ? factionSelect.value : undefined;
     }
     this.loadPlayers();
+  }
+
+  toggleClassMenu() {
+    this.classMenuOpen = !this.classMenuOpen;
+  }
+
+  selectClass(option?: { id: number; name: string; icon: string }) {
+    this.currentClass = option?.id;
+    this.selectedClassLabel = option ? option.name : 'All Classes';
+    this.selectedClassIcon = option?.icon;
+    this.classMenuOpen = false;
+    this.applyFilters();
   }
 
   private loadPlayers() {
