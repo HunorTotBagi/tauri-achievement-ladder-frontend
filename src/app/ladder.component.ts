@@ -25,18 +25,18 @@ export class AchievementLadderComponent implements OnInit {
   getGuildArmoryUrl = getGuildArmoryUrl;
 
   classOptions = [
-    { id: 1, name: 'Warrior', icon: getClassIconPath(1) },
-    { id: 2, name: 'Paladin', icon: getClassIconPath(2) },
-    { id: 3, name: 'Hunter', icon: getClassIconPath(3) },
-    { id: 4, name: 'Rogue', icon: getClassIconPath(4) },
-    { id: 5, name: 'Priest', icon: getClassIconPath(5) },
     { id: 6, name: 'Death Knight', icon: getClassIconPath(6) },
-    { id: 7, name: 'Shaman', icon: getClassIconPath(7) },
-    { id: 8, name: 'Mage', icon: getClassIconPath(8) },
-    { id: 9, name: 'Warlock', icon: getClassIconPath(9) },
-    { id: 10, name: 'Monk', icon: getClassIconPath(10) },
-    { id: 11, name: 'Druid', icon: getClassIconPath(11) },
     { id: 12, name: 'Demon Hunter', icon: getClassIconPath(12) },
+    { id: 11, name: 'Druid', icon: getClassIconPath(11) },
+    { id: 3, name: 'Hunter', icon: getClassIconPath(3) },
+    { id: 8, name: 'Mage', icon: getClassIconPath(8) },
+    { id: 10, name: 'Monk', icon: getClassIconPath(10) },
+    { id: 2, name: 'Paladin', icon: getClassIconPath(2) },
+    { id: 5, name: 'Priest', icon: getClassIconPath(5) },
+    { id: 4, name: 'Rogue', icon: getClassIconPath(4) },
+    { id: 7, name: 'Shaman', icon: getClassIconPath(7) },
+    { id: 9, name: 'Warlock', icon: getClassIconPath(9) },
+    { id: 1, name: 'Warrior', icon: getClassIconPath(1) },
   ];
 
   constructor(private ladderService: LadderService) {}
