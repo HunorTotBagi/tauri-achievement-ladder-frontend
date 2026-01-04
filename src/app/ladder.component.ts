@@ -18,10 +18,53 @@ export class AchievementLadderComponent implements OnInit {
   currentSort: string = 'achievementPoints';
   currentRealm?: string = 'Evermoon';
   currentFaction?: string;
+  currentClass?: number;
+  sortMenuOpen = false;
+  realmMenuOpen = false;
+  factionMenuOpen = false;
+  classMenuOpen = false;
+  selectedSortLabel = 'Achievement Points';
+  selectedRealmLabel = 'All Realms';
+  selectedFactionLabel = 'All Factions';
+  selectedClassLabel = 'All Classes';
+  selectedClassIcon?: string;
   getClassIconPath = getClassIconPath;
   openArmory = openArmory;
   getArmoryUrl = getArmoryUrl;
   getGuildArmoryUrl = getGuildArmoryUrl;
+
+  sortOptions = [
+    { value: 'achievementPoints', label: 'Achievement Points' },
+    { value: 'honorableKills', label: 'Honorable Kills' }
+  ];
+
+  realmOptions = [
+    { value: undefined, label: 'All Realms' },
+    { value: 'Evermoon', label: 'Evermoon' },
+    { value: 'Tauri', label: 'Tauri' },
+    { value: 'WoD', label: 'WoD' },
+  ];
+
+  factionOptions = [
+    { value: undefined, label: 'All Factions' },
+    { value: 'Horde', label: 'Horde' },
+    { value: 'Alliance', label: 'Alliance' }
+  ];
+
+  classOptions = [
+    { id: 6, name: 'Death Knight', icon: getClassIconPath(6) },
+    { id: 12, name: 'Demon Hunter', icon: getClassIconPath(12) },
+    { id: 11, name: 'Druid', icon: getClassIconPath(11) },
+    { id: 3, name: 'Hunter', icon: getClassIconPath(3) },
+    { id: 8, name: 'Mage', icon: getClassIconPath(8) },
+    { id: 10, name: 'Monk', icon: getClassIconPath(10) },
+    { id: 2, name: 'Paladin', icon: getClassIconPath(2) },
+    { id: 5, name: 'Priest', icon: getClassIconPath(5) },
+    { id: 4, name: 'Rogue', icon: getClassIconPath(4) },
+    { id: 7, name: 'Shaman', icon: getClassIconPath(7) },
+    { id: 9, name: 'Warlock', icon: getClassIconPath(9) },
+    { id: 1, name: 'Warrior', icon: getClassIconPath(1) },
+  ];
 
   constructor(private ladderService: LadderService) {}
 
@@ -29,20 +72,74 @@ export class AchievementLadderComponent implements OnInit {
     this.applyFilters();
   }
 
-  applyFilters(sortSelect?: HTMLSelectElement, realmSelect?: HTMLSelectElement, factionSelect?: HTMLSelectElement) {
-    // If select elements are passed, read values directly from them
-    if (sortSelect) {
-      this.currentSort = sortSelect.value;
-      this.currentRealm = realmSelect?.value ? realmSelect.value : undefined;
-      this.currentFaction = factionSelect?.value ? factionSelect.value : undefined;
-    }
+  applyFilters() {
     this.loadPlayers();
+  }
+
+  closeAllDropdowns(except?: 'class' | 'sort' | 'realm' | 'faction') {
+    if (except !== 'class') this.classMenuOpen = false;
+    if (except !== 'sort') this.sortMenuOpen = false;
+    if (except !== 'realm') this.realmMenuOpen = false;
+    if (except !== 'faction') this.factionMenuOpen = false;
+  }
+
+  toggleClassMenu() {
+    const nextState = !this.classMenuOpen;
+    this.closeAllDropdowns('class');
+    this.classMenuOpen = nextState;
+  }
+
+  toggleSortMenu() {
+    const nextState = !this.sortMenuOpen;
+    this.closeAllDropdowns('sort');
+    this.sortMenuOpen = nextState;
+  }
+
+  toggleRealmMenu() {
+    const nextState = !this.realmMenuOpen;
+    this.closeAllDropdowns('realm');
+    this.realmMenuOpen = nextState;
+  }
+
+  toggleFactionMenu() {
+    const nextState = !this.factionMenuOpen;
+    this.closeAllDropdowns('faction');
+    this.factionMenuOpen = nextState;
+  }
+
+  selectSort(option: { value: string; label: string }) {
+    this.currentSort = option.value;
+    this.selectedSortLabel = option.label;
+    this.sortMenuOpen = false;
+    this.applyFilters();
+  }
+
+  selectRealm(option: { value: string | undefined; label: string }) {
+    this.currentRealm = option.value;
+    this.selectedRealmLabel = option.label;
+    this.realmMenuOpen = false;
+    this.applyFilters();
+  }
+
+  selectFaction(option: { value: string | undefined; label: string }) {
+    this.currentFaction = option.value;
+    this.selectedFactionLabel = option.label;
+    this.factionMenuOpen = false;
+    this.applyFilters();
+  }
+
+  selectClass(option?: { id: number; name: string; icon: string }) {
+    this.currentClass = option?.id;
+    this.selectedClassLabel = option ? option.name : 'All Classes';
+    this.selectedClassIcon = option?.icon;
+    this.classMenuOpen = false;
+    this.applyFilters();
   }
 
   private loadPlayers() {
     const observable = this.currentSort === 'achievementPoints'
-      ? this.ladderService.getAchievements(this.currentRealm, this.currentFaction)
-      : this.ladderService.getHonorableKills(this.currentRealm, this.currentFaction);
+      ? this.ladderService.getAchievements(this.currentRealm, this.currentFaction, this.currentClass)
+      : this.ladderService.getHonorableKills(this.currentRealm, this.currentFaction, this.currentClass);
     
     observable.subscribe(data => {
       this.updatePlayers(data);
