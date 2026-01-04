@@ -25,7 +25,6 @@
           <img *ngIf="selectedClassIcon" [src]="selectedClassIcon" alt="Selected class icon" class="option-icon" />
           <span *ngIf="!selectedClassIcon" class="option-icon placeholder"></span>
           <span class="option-label">{{ selectedClassLabel }}</span>
-          <span class="chevron">▾</span>
         </button>
         <div class="class-menu">
           <button type="button" class="class-option" (click)="selectClass()">
