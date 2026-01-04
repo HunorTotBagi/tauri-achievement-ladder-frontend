@@ -18,7 +18,13 @@ export interface LadderAchievement {
 export class LadderService {
   constructor(private http: HttpClient) {}
 
-  getAchievements(realm?: string, faction?: string, pageNumber: number = 1, pageSize: number = 100): Observable<LadderAchievement[]> {
+  getAchievements(
+    realm?: string,
+    faction?: string,
+    playerClass?: number,
+    pageNumber: number = 1,
+    pageSize: number = 100
+  ): Observable<LadderAchievement[]> {
     let url = `http://localhost:5000/api/ladder/sorted/achievements?pageNumber=${pageNumber}&pageSize=${pageSize}`;
     if (realm) {
       url += `&realm=${realm}`;
@@ -26,16 +32,28 @@ export class LadderService {
     if (faction) {
       url += `&faction=${faction}`;
     }
+    if (playerClass) {
+      url += `&playerClass=${playerClass}`;
+    }
     return this.http.get<LadderAchievement[]>(url);
   }
 
-  getHonorableKills(realm?: string, faction?: string, pageNumber: number = 1, pageSize: number = 100): Observable<LadderAchievement[]> {
+  getHonorableKills(
+    realm?: string,
+    faction?: string,
+    playerClass?: number,
+    pageNumber: number = 1,
+    pageSize: number = 100
+  ): Observable<LadderAchievement[]> {
     let url = `http://localhost:5000/api/ladder/sorted/honorableKills?pageNumber=${pageNumber}&pageSize=${pageSize}`;
     if (realm) {
       url += `&realm=${realm}`;
     }
     if (faction) {
       url += `&faction=${faction}`;
+    }
+    if (playerClass) {
+      url += `&playerClass=${playerClass}`;
     }
     return this.http.get<LadderAchievement[]>(url);
   }

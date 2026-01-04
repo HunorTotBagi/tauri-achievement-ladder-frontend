@@ -73,6 +73,12 @@
     color: #e0e0e0;
     padding: 10px;
     font-weight: 500;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 18px 18px;
+    &.class-option {
+      padding-left: 36px;
+    }
     
     &:hover {
       background-color: #252525;

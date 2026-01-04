@@ -17,6 +17,21 @@
         <option value="WoD">WoD</option>
       </select>
     </div>
+
+    <div class="filter-group">
+      <label for="classSelect" class="filter-label">Class:</label>
+      <select #classSelect id="classSelect" class="filter-select">
+        <option value="">All Classes</option>
+        <option
+          *ngFor="let cls of classOptions"
+          class="class-option"
+          [style.backgroundImage]="'url(' + cls.icon + ')'
+          "
+          [value]="cls.id">
+          {{ cls.name }}
+        </option>
+      </select>
+    </div>
     
     <div class="filter-group">
       <label for="factionSelect" class="filter-label">Faction:</label>
@@ -27,7 +42,7 @@
       </select>
     </div>
     
-    <button type="button" (click)="applyFilters(sortSelect, realmSelect, factionSelect)" class="filter-button">Filter</button>
+    <button type="button" (click)="applyFilters(sortSelect, realmSelect, classSelect, factionSelect)" class="filter-button">Filter</button>
   </div>
 
   <table class="wow-table">

@@ -18,10 +18,26 @@ export class AchievementLadderComponent implements OnInit {
   currentSort: string = 'achievementPoints';
   currentRealm?: string = 'Evermoon';
   currentFaction?: string;
+  currentClass?: number;
   getClassIconPath = getClassIconPath;
   openArmory = openArmory;
   getArmoryUrl = getArmoryUrl;
   getGuildArmoryUrl = getGuildArmoryUrl;
+
+  classOptions = [
+    { id: 1, name: 'Warrior', icon: getClassIconPath(1) },
+    { id: 2, name: 'Paladin', icon: getClassIconPath(2) },
+    { id: 3, name: 'Hunter', icon: getClassIconPath(3) },
+    { id: 4, name: 'Rogue', icon: getClassIconPath(4) },
+    { id: 5, name: 'Priest', icon: getClassIconPath(5) },
+    { id: 6, name: 'Death Knight', icon: getClassIconPath(6) },
+    { id: 7, name: 'Shaman', icon: getClassIconPath(7) },
+    { id: 8, name: 'Mage', icon: getClassIconPath(8) },
+    { id: 9, name: 'Warlock', icon: getClassIconPath(9) },
+    { id: 10, name: 'Monk', icon: getClassIconPath(10) },
+    { id: 11, name: 'Druid', icon: getClassIconPath(11) },
+    { id: 12, name: 'Demon Hunter', icon: getClassIconPath(12) },
+  ];
 
   constructor(private ladderService: LadderService) {}
 
@@ -29,11 +45,12 @@ export class AchievementLadderComponent implements OnInit {
     this.applyFilters();
   }
 
-  applyFilters(sortSelect?: HTMLSelectElement, realmSelect?: HTMLSelectElement, factionSelect?: HTMLSelectElement) {
+  applyFilters(sortSelect?: HTMLSelectElement, realmSelect?: HTMLSelectElement, classSelect?: HTMLSelectElement, factionSelect?: HTMLSelectElement) {
     // If select elements are passed, read values directly from them
     if (sortSelect) {
       this.currentSort = sortSelect.value;
       this.currentRealm = realmSelect?.value ? realmSelect.value : undefined;
+      this.currentClass = classSelect?.value ? parseInt(classSelect.value, 10) : undefined;
       this.currentFaction = factionSelect?.value ? factionSelect.value : undefined;
     }
     this.loadPlayers();
@@ -41,8 +58,8 @@ export class AchievementLadderComponent implements OnInit {
 
   private loadPlayers() {
     const observable = this.currentSort === 'achievementPoints'
-      ? this.ladderService.getAchievements(this.currentRealm, this.currentFaction)
-      : this.ladderService.getHonorableKills(this.currentRealm, this.currentFaction);
+      ? this.ladderService.getAchievements(this.currentRealm, this.currentFaction, this.currentClass)
+      : this.ladderService.getHonorableKills(this.currentRealm, this.currentFaction, this.currentClass);
     
     observable.subscribe(data => {
       this.updatePlayers(data);
